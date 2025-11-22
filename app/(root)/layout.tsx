@@ -2,6 +2,7 @@ import Image from "next/image";
 import Sidebar from "@/components/Sidebar";
 import MobileNav from "@/components/MobileNav";
 
+
 export default async function RootLayout({
   children,
 }: Readonly<{
