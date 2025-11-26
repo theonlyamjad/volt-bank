@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { email, set, z } from "zod"
+import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
@@ -10,10 +10,9 @@ import {Form} from "@/components/ui/form"
 import CustomInput from './CustomInput'
 import { Loader2 } from 'lucide-react'
 import { authFormSchema } from '@/lib/utils'
-import { sign } from 'crypto'
-import SignUp from '@/app/(auth)/sign-up/page'
 import { useRouter } from 'next/navigation'
 import { signIn, signUp } from '@/lib/actions/user.action'
+import { getLoggedInUser } from '@/lib/actions/user.action'
 
 
 const AuthForm = ({type}:{type:string}) => {
@@ -23,13 +22,36 @@ const AuthForm = ({type}:{type:string}) => {
   const formSchema = authFormSchema(type);
   const [user,setUser]=useState(null);
   const [isLoading,setIsLoading]=useState(false);
+  // const LoggedInUser = await getLoggedInUser();
+
+  // Define default values based on form type
+  const getDefaultValues = () => {
+    const baseDefaults = {
+      email: "",
+      password: "",
+    };
+
+    if (type === "sign-up") {
+      return {
+        ...baseDefaults,
+        firstName: "",
+        lastName: "",
+        address1: "",
+        city: "",
+        state: "",
+        postalCode: "",
+        dateOfBirth: "",
+        ssn: "",
+      };
+    }
+
+    return baseDefaults;
+  };
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
+    defaultValues: getDefaultValues(),
+    mode: "onChange",
   })
  
   // 2. Define a submit handler.
@@ -41,11 +63,11 @@ const AuthForm = ({type}:{type:string}) => {
       console.log(newUser);
     }
     if(type==="sign-in"){
-        const response = await signIn({
-          email : data.email,
-          password : data.password
-        })
-        if (response) router.push('/');
+        // const response = await signIn({
+        //   email : data.email,
+        //   password : data.password,
+        // })
+        // if (response) router.push('/');
     }
     }catch(error){
       console.log(error)
@@ -73,7 +95,7 @@ const AuthForm = ({type}:{type:string}) => {
                     ? "Link Account"
                     : type === "sign-in"
                     ? "Sign In to Your Account"
-                    : "Sign Up for Volt Bank"
+                    : "Sign Up"
                 }
                 <p className="text-16 font-normal text-gray-600">
                     {user
@@ -92,7 +114,7 @@ const AuthForm = ({type}:{type:string}) => {
             <>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                        {type === 'sign-in' && (
+                        {type === 'sign-up' && (
                           <>
                             <div className="flex gap-4">
                                 <CustomInput
@@ -110,7 +132,7 @@ const AuthForm = ({type}:{type:string}) => {
                             </div>
                               <CustomInput
                                 control={form.control}
-                                name="address"
+                                name="address1"
                                 label="Address"
                                 placeholder="Enter your address"
                               />
