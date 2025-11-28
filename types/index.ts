@@ -1,13 +1,15 @@
+import type { UseFormSetValue } from "react-hook-form";
+
 /* eslint-disable no-unused-vars */
 
-declare type SearchParamProps = {
+export type SearchParamProps = {
   params: { [key: string]: string };
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
 // ========================================
 
-declare type SignUpParams = {
+export type SignUpParams = {
   firstName?: string;
   lastName?: string;
   address1?: string;
@@ -20,7 +22,12 @@ declare type SignUpParams = {
   password: string;
 };
 
-declare type LoginUser = {
+export type SignInParams = {
+  email: string;
+  password: string;
+};
+
+export type LoginUser = {
   email: string;
   password: string;
 };
@@ -67,7 +74,6 @@ declare type Transaction = {
   $id: string;
   name: string;
   paymentChannel: string;
-  type: string;
   accountId: string;
   amount: number;
   pending: boolean;
@@ -293,7 +299,7 @@ declare interface getTransactionsByBankIdProps {
   bankId: string;
 }
 
-declare interface signInProps {
+declare interface signInProps { 
   email: string;
   password: string;
 }

@@ -4,6 +4,19 @@ import qs from "query-string";
 import { twMerge } from "tailwind-merge";
 import { z } from "zod";
 
+type AccountTypes = "depository" | "credit" | "other";
+
+interface Transaction {
+  category: string;
+  [key: string]: any;
+}
+
+interface CategoryCount {
+  name: string;
+  count: number;
+  totalCount: number;
+}
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }

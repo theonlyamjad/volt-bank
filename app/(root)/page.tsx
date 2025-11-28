@@ -1,35 +1,49 @@
 import HeaderBox from '@/components/HeaderBox'
-import React from 'react'
 import TotalBalanceBox from '@/components/TotalBalanceBox'
-import RightSidebar from '@/components/RightSidebar';
+import RightSidebar from '@/components/RightSidebar'
+import { getLoggedInUser } from '@/lib/actions/user.action'
+import { redirect } from 'next/navigation'
+import type { IBank } from '@/lib/models/Bank'
+import type { ITransaction } from '@/lib/models/Transaction'
 
-const Home = () => {
+const Home = async () => {
+  // Fetch logged-in user data
+  const loggedIn = await getLoggedInUser();
 
-  const loggedIn = {firsName: "Amjad",lastName:"Ben amara",email:"amjad@gmail.com"};
+  // Redirect if not authenticated
+  if (!loggedIn) {
+    redirect('/sign-in');
+  }
+
+  // TODO: Fetch user's banks and transactions
+  const userBanks: IBank[] = [];
+  const userTransactions: ITransaction[] = [];
+  const totalBanks = 0;
+  const totalCurrentBalance = 0;
 
   return (
     <section className='home'>
       <div className='home-content'>
         <header className='home-header'>
           <HeaderBox
-          type="greeting"
-          title="Welcome"
-          user = {loggedIn?.firsName || "Guest"}
-          subtext = "A modern, youth-focused digital banking experience built for speed, simplicity and control."
+            type="greeting"
+            title="Welcome"
+            user={loggedIn?.firstName || "Guest"}
+            subtext="A modern, youth-focused digital banking experience built for speed, simplicity and control."
           />
           <TotalBalanceBox
-          accounts={[]}
-          totalBanks={1}
-          totalCurrentBalance={1250.35}
+            accounts={[]}
+            totalBanks={totalBanks}
+            totalCurrentBalance={totalCurrentBalance}
           />
         </header>
         RECENT TRANSACTIONS
       </div>
       <RightSidebar 
         user={loggedIn}
-        transactions={[]}
-        banks={[{currentBalance:500},{currentBalance:1000}]}
-        />
+        transactions={userTransactions}
+        banks={userBanks}
+      />
     </section>
   )
 }
