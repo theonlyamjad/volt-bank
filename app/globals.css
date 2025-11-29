@@ -151,25 +151,13 @@
   .flex-center { @apply flex items-center justify-center; }
   .header-2 { @apply text-18 font-semibold text-gray-900; }
   
-  /* Font Utilities */
-  .text-10 { @apply text-10; }
-  .text-12 { @apply text-12; }
-  .text-14 { @apply text-14; }
-  .text-16 { @apply text-16; }
-  .text-18 { @apply text-18; }
-  .text-20 { @apply text-20; }
-  .text-24 { @apply text-24; }
-  .text-26 { @apply text-26; }
-  .text-30 { @apply text-30; }
-  .text-36 { @apply text-36; }
-
   /* -- Inputs -- */
   .input-class {
     @apply text-16 placeholder:text-16 rounded-lg border border-gray-300 text-gray-900 placeholder:text-gray-500;
   }
 
   .sheet-content button {
-    @apply focus:ring-0 focus-visible:ring-transparent focus:ring-offset-0 focus-visible:ring-offset-0 focus-visible:outline-none focus-visible:border-none;
+    @apply focus:!ring-0 focus-visible:!ring-transparent focus:!ring-offset-0 focus-visible:!ring-offset-0 focus-visible:!outline-none focus-visible:!border-none;
   }
 
   .text14_padding10 {
@@ -221,10 +209,10 @@
     @apply text-20 md:text-24 font-semibold text-gray-900;
   }
 
-  /* Custom Scrollbar styles manually applied here */
   .recent-transactions-tablist {
     @apply mb-8 flex w-full flex-nowrap;
   }
+  /* Custom Scrollbar styles manually applied here to match v4 structure */
   .recent-transactions-tablist::-webkit-scrollbar {
     width: 3px; height: 3px; border-radius: 2px;
   }
@@ -253,7 +241,6 @@
     @apply relative flex px-6 max-xl:justify-center;
   }
 
-  /* FIX: Replaced @apply flex-center with actual utilities */
   .profile-img {
     @apply flex items-center justify-center absolute -top-8 size-24 rounded-full bg-gray-100 border-8 border-white p-2 shadow-profile;
   }
@@ -292,7 +279,6 @@
     @apply flex flex-col justify-between gap-4 rounded-lg border-y bg-blue-600 px-4 py-5 md:flex-row;
   }
 
-  /* FIX: Replaced @apply flex-center with actual utilities */
   .transactions-account-balance {
     @apply flex items-center justify-center flex-col gap-2 rounded-md bg-blue-25/20 px-4 py-2 text-white;
   }
@@ -332,7 +318,6 @@
   }
 
   /* -- Category Badge -- */
-  /* FIX: Replaced @apply flex-center with actual utilities */
   .category-badge {
     @apply flex items-center justify-center truncate w-fit gap-1 rounded-2xl border-[1.5px] py-[2px] pl-1.5 pr-2;
   }

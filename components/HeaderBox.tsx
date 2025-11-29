@@ -1,4 +1,5 @@
 import React from 'react'
+import { HeaderBoxProps } from '@/types/index';
 
 const HeaderBox = ({type ='title' ,title,subtext,user}: HeaderBoxProps)  => {
   return (

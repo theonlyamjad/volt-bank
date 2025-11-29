@@ -3,8 +3,7 @@ import TotalBalanceBox from '@/components/TotalBalanceBox'
 import RightSidebar from '@/components/RightSidebar'
 import { getLoggedInUser } from '@/lib/actions/user.action'
 import { redirect } from 'next/navigation'
-import type { IBank } from '@/lib/models/Bank'
-import type { ITransaction } from '@/lib/models/Transaction'
+import type { Bank, Transaction } from '@/types'
 
 const Home = async () => {
   // Fetch logged-in user data
@@ -16,8 +15,8 @@ const Home = async () => {
   }
 
   // TODO: Fetch user's banks and transactions
-  const userBanks: IBank[] = [];
-  const userTransactions: ITransaction[] = [];
+  const userBanks: Bank[] = [];
+  const userTransactions: Transaction[] = [];
   const totalBanks = 0;
   const totalCurrentBalance = 0;
 

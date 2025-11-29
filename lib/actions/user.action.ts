@@ -184,7 +184,7 @@ export async function getLoggedInUser() {
   }
 }
 
-export async function logOut() {
+export async function logoutAccount() {
   try {
     const cookieStore = await cookies();
     cookieStore.delete(COOKIE_NAME);
