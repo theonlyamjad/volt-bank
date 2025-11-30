@@ -4,6 +4,7 @@ import RightSidebar from '@/components/RightSidebar'
 import { getLoggedInUser } from '@/lib/actions/user.action'
 import { redirect } from 'next/navigation'
 import type { Bank, Transaction } from '@/types'
+import Footer from '@/components/Footer'
 
 const Home = async () => {
   // Fetch logged-in user data

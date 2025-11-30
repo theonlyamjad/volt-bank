@@ -22,7 +22,7 @@ const AuthForm = ({type}:{type:string}) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
+ 
   // Define default values based on form type
   const getDefaultValues = () => {
     const baseDefaults = {
@@ -119,12 +119,6 @@ const AuthForm = ({type}:{type:string}) => {
               : "Sign Up"
             }
           </h1>
-          <p className="text-16 font-normal text-gray-600">
-            {user
-              ? "Link your existing account to continue."
-              : "Please enter your details"
-            }
-          </p>
         </div>
       </header>
 
@@ -219,7 +213,7 @@ const AuthForm = ({type}:{type:string}) => {
 
               {/* Submit Button */}
               <div className="flex flex-col gap-4">
-                <Button type="submit" className="form-btn" disabled={isLoading}>
+                <Button type="submit" className="form-btn cursor-pointer" disabled={isLoading}>
                   {isLoading ? (
                     <>
                       <Loader2 size={20} className='animate-spin' /> &nbsp; Processing...

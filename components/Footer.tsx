@@ -1,3 +1,5 @@
+'use client'
+
 import { logoutAccount } from '@/lib/actions/user.action'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -7,16 +9,22 @@ const Footer = ({ user, type = 'desktop' }: FooterProps) => {
   const router = useRouter();
 
   const handleLogOut = async () => {
-    const loggedOut = await logoutAccount();
-
-    if(loggedOut) router.push('/sign-in')
+    try {
+      const result = await logoutAccount();
+      
+      if (result?.success) {
+        router.push('/sign-in');
+      }
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
   }
 
   return (
     <footer className="footer">
       <div className={type === 'mobile' ? 'footer_name-mobile' : 'footer_name'}>
         <p className="text-xl font-bold text-gray-700">
-          {user?.firstName[0]}
+          {user?.firstName?.[0] || 'U'}
         </p>
       </div>
 
@@ -29,8 +37,8 @@ const Footer = ({ user, type = 'desktop' }: FooterProps) => {
           </p>
       </div>
 
-      <div className="footer_image" onClick={handleLogOut}>
-        <Image src="icons/logout.svg" fill alt="jsm" />
+      <div className="footer_image cursor-pointer" onClick={handleLogOut}>
+        <Image src="/icons/logout.svg" width={20} height={20} alt="logout" />
       </div>
     </footer>
   )
